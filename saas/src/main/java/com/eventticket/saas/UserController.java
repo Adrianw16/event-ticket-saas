@@ -10,6 +10,9 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
 
+    //If removed, User Repo couldn't be instantiated since it's an interface
+    //Autowired wires the correct bean which creates the concrete class tha implements
+    //the interface so it can be used
     @Autowired
     private UserRepository userRepository;
 

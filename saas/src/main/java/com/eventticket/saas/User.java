@@ -14,6 +14,10 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class User {
 
+    //Without @Id tag, JPA wouldn't know which one it's the pk.
+
+    //Without @GeneratedValue, JPA would require a value for id
+    //every time a new user is created
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
