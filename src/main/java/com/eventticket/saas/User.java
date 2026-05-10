@@ -1,5 +1,6 @@
 package com.eventticket.saas;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,6 +28,11 @@ public class User {
 
     @Column(nullable = false)
     private String passwordHash;
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "org_id", nullable = false)
+    private Organization organization;
 
     @Column(name = "created_at", insertable = false, updatable = false)
     private LocalDateTime createdAt;
