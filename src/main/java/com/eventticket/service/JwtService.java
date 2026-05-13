@@ -17,7 +17,7 @@ public class JwtService {
 
     public JwtService(
             @Value ("${jwt.secret:my-256-bit-secret-must-be-at-least-32-characters-long}") String secret,
-            @Value("${jwt.expiration-ms:86400000") long expirationMs
+            @Value("${jwt.expiration-ms:86400000}") long expirationMs
     ){
         //ensure secret is at least 32 characters long
         if(secret.length() < 32){
