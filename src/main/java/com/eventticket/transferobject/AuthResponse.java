@@ -1,4 +1,4 @@
-package com.eventticket.auth;
+package com.eventticket.transferobject;
 
 public class AuthResponse {
     private Long userId;

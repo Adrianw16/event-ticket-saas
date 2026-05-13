@@ -1,4 +1,4 @@
-package com.eventticket.auth;
+package com.eventticket.service;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;

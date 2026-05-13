@@ -1,4 +1,4 @@
-package com.eventticket.saas;
+package com.eventticket.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -28,4 +28,20 @@ public class Organization {
 
     @Column(name = "created_at", insertable = false, updatable = false)
     private LocalDateTime createdAt;
+
+    //Getters & Setters
+    public Long getId(){return id;}
+    public void setId(Long id){this.id = id;}
+
+    public String getName() {return name;}
+    public void setName(String name) {this.name = name;}
+
+    public String getSlug() {return slug;}
+    public void setSlug(String slug) {this.slug = slug;}
+
+    public String getEmail() {return email;}
+    public void setEmail(String email) {this.email = email;}
+
+    public LocalDateTime getCreatedAt() {return createdAt;}
+
 }

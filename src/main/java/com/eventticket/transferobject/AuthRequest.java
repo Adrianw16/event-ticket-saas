@@ -1,4 +1,4 @@
-package com.eventticket.auth;
+package com.eventticket.transferobject;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

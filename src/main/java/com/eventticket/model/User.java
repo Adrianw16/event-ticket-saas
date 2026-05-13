@@ -1,7 +1,11 @@
-package com.eventticket.saas;
+package com.eventticket.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.EnumType;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,6 +37,15 @@ public class User {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "org_id", nullable = false)
     private Organization organization;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private UserRole role = UserRole.ORGANIZER;
+
+    public enum UserRole{
+        ORGANIZER, ADMIN
+    }
+
 
     @Column(name = "created_at", insertable = false, updatable = false)
     private LocalDateTime createdAt;
