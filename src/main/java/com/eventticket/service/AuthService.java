@@ -1,6 +1,7 @@
 package com.eventticket.service;
 
-import com.eventticket.transferobject.AuthRequest;
+import com.eventticket.transferobject.LoginRequest;
+import com.eventticket.transferobject.RegisterRequest;
 import com.eventticket.transferobject.AuthResponse;
 import com.eventticket.service.JwtService;
 import com.eventticket.model.Organization;
@@ -36,7 +37,7 @@ public class AuthService {
      * Register a new organizer with their organization.
      * Creates a new Organization + User (ORGANIZER role), hashes password, returns JWT.
      */
-    public AuthResponse register(AuthRequest request){
+    public AuthResponse register(RegisterRequest request){
         //First check if user exists already
         if(userRepository.findByEmail(request.getEmail()).isPresent()){
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Email already registered");
@@ -45,6 +46,10 @@ public class AuthService {
         //Check if org name already exists
         if(organizationRepository.findByName(request.getOrganizationName()).isPresent()){
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Organization name already exists");
+        }
+
+        if (request.getOrganizationName() == null || request.getOrganizationName().isBlank()){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Organization name is required");
         }
 
         //Create Organization
@@ -78,7 +83,7 @@ public class AuthService {
      * Login an organizer with email + password.
      * Validate credentials, returns JWT if valid.
      */
-    public AuthResponse login(AuthRequest request){
+    public AuthResponse login(LoginRequest request){
         // Find user by email
         User user = userRepository.findByEmail(request.getEmail())
                 .orElse(null);

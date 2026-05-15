@@ -7,5 +7,6 @@ C:\Users\luque\event-ticket-saas\src\main\java\com\eventticket\repository\UserRe
 C:\Users\luque\event-ticket-saas\src\main\java\com\eventticket\SaasApplication.java
 C:\Users\luque\event-ticket-saas\src\main\java\com\eventticket\service\AuthService.java
 C:\Users\luque\event-ticket-saas\src\main\java\com\eventticket\service\JwtService.java
-C:\Users\luque\event-ticket-saas\src\main\java\com\eventticket\transferobject\AuthRequest.java
 C:\Users\luque\event-ticket-saas\src\main\java\com\eventticket\transferobject\AuthResponse.java
+C:\Users\luque\event-ticket-saas\src\main\java\com\eventticket\transferobject\LoginRequest.java
+C:\Users\luque\event-ticket-saas\src\main\java\com\eventticket\transferobject\RegisterRequest.java

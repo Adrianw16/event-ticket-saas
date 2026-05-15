@@ -1,4 +1,5 @@
 com\eventticket\transferobject\AuthResponse.class
+com\eventticket\transferobject\LoginRequest.class
 com\eventticket\repository\UserRepository.class
 com\eventticket\controller\AuthController.class
 com\eventticket\model\User.class
@@ -6,7 +7,7 @@ com\eventticket\repository\OrganizationRepository.class
 com\eventticket\service\AuthService.class
 com\eventticket\config\SecurityConfig.class
 com\eventticket\model\User$UserRole.class
+com\eventticket\transferobject\RegisterRequest.class
 com\eventticket\SaasApplication.class
 com\eventticket\model\Organization.class
 com\eventticket\service\JwtService.class
-com\eventticket\transferobject\AuthRequest.class
