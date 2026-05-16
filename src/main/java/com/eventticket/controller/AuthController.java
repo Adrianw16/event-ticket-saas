@@ -1,5 +1,8 @@
 package com.eventticket.controller;
 
+import com.eventticket.model.User;
+import com.eventticket.repository.UserRepository;
+import com.eventticket.transferobject.UserProfile;
 import com.eventticket.transferobject.LoginRequest;
 import com.eventticket.transferobject.RegisterRequest;
 import com.eventticket.transferobject.AuthResponse;
@@ -9,11 +12,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/auth")
 public class AuthController {
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private AuthService authService;
@@ -40,5 +47,25 @@ public class AuthController {
         // Delegate to service (validates credentials, generates JWT)
         AuthResponse response = authService.login(request);
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<UserProfile> getCurrentUser(){
+        // Extract user ID from SecurityContext
+        Long userId = (Long) SecurityContextHolder.getContext()
+                .getAuthentication()
+                .getPrincipal();
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        UserProfile profile = new UserProfile(
+                user.getId(),
+                user.getEmail(),
+                user.getOrganization().getId(),
+                user.getRole().toString()
+        );
+
+        return ResponseEntity.ok(profile);
     }
 }
