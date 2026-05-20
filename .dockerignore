@@ -1,0 +1,10 @@
+# -- Exclude unnecessary files from docker build
+
+.git
+.gitignore
+.idea
+.vscode
+*.md
+target/
+*.log
+.env
