@@ -1,3 +1,4 @@
 com\eventticket\saas\SaasApplicationTests.class
-com\eventticket\auth\JwtServiceTest.class
+com\eventticket\auth\AuthIntegrationTest.class
 com\eventticket\auth\AuthControllerTest.class
+com\eventticket\auth\JwtServiceTest.class
