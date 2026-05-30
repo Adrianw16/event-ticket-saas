@@ -5,6 +5,7 @@ com\eventticket\controller\AuthController.class
 com\eventticket\model\User.class
 com\eventticket\repository\OrganizationRepository.class
 com\eventticket\service\AuthService.class
+com\eventticket\controller\HealthController.class
 com\eventticket\config\SecurityConfig.class
 com\eventticket\model\User$UserRole.class
 com\eventticket\transferobject\RegisterRequest.class

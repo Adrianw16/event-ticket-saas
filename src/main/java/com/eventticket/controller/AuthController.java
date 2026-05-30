@@ -2,6 +2,7 @@ package com.eventticket.controller;
 
 import com.eventticket.model.User;
 import com.eventticket.repository.UserRepository;
+import com.eventticket.tenant.TenantContext;
 import com.eventticket.transferobject.UserProfile;
 import com.eventticket.transferobject.LoginRequest;
 import com.eventticket.transferobject.RegisterRequest;
@@ -14,6 +15,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/auth")
@@ -67,5 +71,26 @@ public class AuthController {
         );
 
         return ResponseEntity.ok(profile);
+    }
+
+    /**
+     * GET /ap1/v1/auth/whoami
+     * Temporary endpoint: verifies TenantContext is populated on authenticated requests.
+     * @return
+     */
+    @GetMapping("/whoami")
+    public ResponseEntity<Map<String, Object>> whoami(){
+        Long  userId = (Long) SecurityContextHolder.getContext()
+                .getAuthentication()
+                .getPrincipal();
+
+        Long orgId = TenantContext.getCurrentOrgId(); // Will throw if interceptor didn't run.
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("userId", userId);
+        result.put("orgId", orgId);
+        result.put("tenantContextWorking", true);
+
+        return ResponseEntity.ok(result);
     }
 }

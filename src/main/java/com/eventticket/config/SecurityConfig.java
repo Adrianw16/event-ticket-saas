@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -39,12 +40,16 @@ public class SecurityConfig {
                 // Auth rules
                 .authorizeHttpRequests(authz -> authz
                         // Public endpoints (no auth required)
-                        .requestMatchers("api/v1/auth/register", "/api/v1/auth/login").permitAll()
-                        .requestMatchers("/public/**").permitAll()
-                        .requestMatchers("/health").permitAll()
+                        .requestMatchers(
+                                new AntPathRequestMatcher("/api/v1/auth/register"),
+                                new AntPathRequestMatcher("/api/v1/auth/login")
+                        ).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/public/**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/health")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/error")).permitAll()
 
                         // Protected endpoints (auth required)
-                        .requestMatchers("/api/v1/**").authenticated()
+                        .requestMatchers(new AntPathRequestMatcher("/api/v1/**")).authenticated()
 
                         // Everything else requires authentication
                         .anyRequest().authenticated()
